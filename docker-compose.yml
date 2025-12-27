@@ -1,0 +1,33 @@
+version: '3.8'
+
+services: 
+  postgres: 
+    image: postgres:17
+    container_name: postgres
+    environment:
+      POSTGRES_DB: go-loan-car-db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: myemail@email.com
+      PGADMIN_DEFAULT_PASSWORD: mypassword
+    ports: 
+      - "5052:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    restart: always
+
+volumes:
+  postgres_data:
+  pgadmin_data:

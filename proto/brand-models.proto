@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package = "grpc-brand-models/proto";
+
+// Create Model Brand
+message RequestBrandModel {
+    int32  brand_id = 1;
+    string model_code = 2;
+    string model_name = 3;
+    int32  year_start = 4;
+    int32  year_end = 5;
+    string body_type = 6;
+    string engine_type = 7;
+    int32  engine_size = 8;
+    string fuel_consumption = 9;
+    string transmission = 10;
+    string generation = 11;
+}
+
+message ResponseBrandModel {
+    int32  id = 1;
+    int32  brand_id = 2;
+    string model_code = 3;
+    string model_name = 4;
+    int32  year_start = 5;
+    int32  year_end = 6;
+    string body_type = 7;
+    string engine_type = 8;
+    int32  engine_size = 9;
+    string fuel_consumption = 10;
+    string transmission = 11;
+    string generation = 12;
+    string message = 13;
+}
+
+// Request and Response single brand model
+message RequestBrandModelSingle {
+    int32 id = 1;
+}
+
+message ResponseBrandModelSingle {
+    int32  id = 1;
+    int32  brand_id = 2;
+    string model_name = 3;
+    string body_type = 4;
+    string engine_type = 5;
+    int32  engine_size = 6;
+    string fuel_consumption = 7;
+    string transmission = 8;
+    string generation = 9;
+    string message = 10;
+}
+
+message RequestModelWithBrand {
+    uint32 brand_id = 1;
+}
+
+message CarModels {
+    // uint32 brand_id = 1;
+    string model_code = 1;
+    string model_name = 2;
+}
+
+message ResponseModelWithBrand {
+    repeated CarModels model = 1;
+}
+
+service ModelService {
+    rpc CreateBrandModel (RequestBrandModel) returns (ResponseBrandModel);
+    rpc GetModelsBrand (RequestBrandModelSingle) returns (ResponseBrandModelSingle);
+    rpc GetModelsWithBrand (RequestModelWithBrand) returns (ResponseModelWithBrand);
+}

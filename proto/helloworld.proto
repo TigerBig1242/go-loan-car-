@@ -1,0 +1,24 @@
+// กำหนด version ของ Protocol Buffers ที่ใช้
+syntax = "proto3";
+
+// กำหนด package สำหรับ Go (ใช้สำหรับ reference ภายใน go)
+option go_package = "grpc-hello-world/proto";
+
+// นิยาม service ชื่อ Greeter
+service Greeter {
+  // กำหนด RPC method ชื่อ SayHello
+  // รับ HelloRequest และส่งคืน HelloReply
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+// นิยาม message สำหรับคำขอ
+message HelloRequest {
+  // field name เป็น string มี tag number 1
+  string name = 1;
+}
+
+// นิยาม message สำหรับการตอบกลับ
+message HelloReply {
+  // field message เป็น string มี tag number 1
+  string message = 1;
+}
